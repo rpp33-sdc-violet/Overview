@@ -1,0 +1,28 @@
+{
+  "name": "overview",
+  "version": "1.0.0",
+  "description": "Product Overview API for Atelier",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp33-sdc-violet/overview.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp33-sdc-violet/overview/issues"
+  },
+  "homepage": "https://github.com/rpp33-sdc-violet/overview#readme",
+  "devDependencies": {
+    "express": "^4.17.3",
+    "jest": "^27.5.1",
+    "mongoose": "^6.2.8"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
