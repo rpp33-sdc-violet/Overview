@@ -2,11 +2,10 @@ const express = require('express')
 const app = express()
 const port = 8080
 const routes = require('./routes.js');
-var ProductModel = require('../database/dbSchema.js');
+var ProductModel = require('../database/dbSchema.js').productModel;
 
 
 app.get('/', (req, res) => {
-
   ProductModel.find({id: 9}).lean().exec( function (err, docs) {
     if (err) {
       console.log('err retrieving data', err);
@@ -15,10 +14,6 @@ app.get('/', (req, res) => {
     res.send({ data: docs });
     res.end();
   }); //{ "id": 1 }
-
-
-
-
 });
 
 app.use('/', routes);
