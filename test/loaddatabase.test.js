@@ -1,7 +1,8 @@
 var ProductModel = require('../database/dbSchema.js').productModel;
 var FeatureModel = require('../database/dbSchema.js').featureModel;
-var mongoose = require('mongoose');
+var mongoose = require('../database/dbConnection.js');
 
+var { ObjectId } = mongoose.Types;
 /* How product document looks like: when retrive with find:
 [
   {
@@ -34,21 +35,67 @@ describe('load process', () => {
     })
 
     it('product id of the 7th document must be number 7 name Blues', async () => {
-      var product = await ProductModel.findOne({id: 7}).lean()
+
+      var product = await ProductModel.findOne({id: 7}).populate('features','feature value -_id').lean()
+      console.log('product', product);
+      var features = [ {
+          feature: 'Sole',
+          value: 'Rubber'
+        },
+        {
+          feature: 'Material',
+          value: 'FullControlSkin'
+        },
+        {
+          feature: 'Stitching',
+          value: 'Double Stitch'
+      }]
       expect(product.name).toEqual('Blues Suede Shoes');
       expect(product.id).toEqual(7);
+      expect(product.features).toEqual(features);
     })
 
-    it('product id of the 7th document must be number 8 name YEasy', async () => {
+    it('product id of the 8th document must be number 8 name YEasy', async () => {
       var product = await ProductModel.findOne({id: 8}).lean()
       expect(product.name).toEqual('YEasy 350');
       expect(product.id).toEqual(8);
     })
 
-    it('product id of the 7th document must be number 9 name Blues', async () => {
-      var product = await ProductModel.findOne({id: 9}).lean()
+    it('product id of the 9th document must be number 9 name Blues, and able to get features out of the populate function', async () => {
+      var product = await ProductModel.findOne({id: 9}).populate('features').lean()
+      var features = [
+        {
+          _id: ObjectId("623ef7edc896a02970de1d19"),
+          id: 24,
+          product_id: 9,
+          feature: 'Sole',
+          value: 'Rubber'
+        },
+        {
+          _id: ObjectId("623ef7edc896a02970de1d1e"),
+          id: 25,
+          product_id: 9,
+          feature: 'Material',
+          value: 'FullControlSkin'
+        },
+        {
+          _id: ObjectId("623ef7edc896a02970de1d21"),
+          id: 26,
+          product_id: 9,
+          feature: 'Mid-Sole',
+          value: 'ControlSupport Arch Bridge'
+        },
+        {
+          _id: ObjectId("623ef7edc896a02970de1d22"),
+          id: 27,
+          product_id: 9,
+          feature: 'Stitching',
+          value: 'Double Stitch'
+        }
+      ]
       expect(product.name).toEqual('Summer Shoes');
       expect(product.id).toEqual(9);
+      expect(product.features).toEqual(features);
     })
 
     it('should have 1000011 rows (header included)', (done) => {
@@ -77,6 +124,9 @@ describe('load process', () => {
       })
     })
   })
-  afterAll(()=>{ mongoose.disconnect()});
+
+  afterAll(()=>{
+    mongoose.disconnect();
+  });
 });
 
