@@ -1,9 +1,9 @@
 var mongoose = require('./dbConnection.js');
+var { Schema } = mongoose;
 
 //document = row
 //model = 1 table
 
-var { Schema } = mongoose;
 var productSchema = new Schema({
   id: Number,
   name: String,
@@ -19,7 +19,38 @@ var featureSchema = new Schema({
   feature: String,
   value: String
 });
+var relatedSchema = new Schema({
+  id: Number,
+  current_product_id: Number,
+  related_product_id: Number
+});
+var skuSchema = new Schema({
+  id: Number,
+  styleId: Number,
+  quantity: Number,
+  size: String
+});
+var styleSchema = new Schema({
+  id: Number,
+  productId: Number,
+  name: String,
+  sale_price: String,
+  original_price: String,
+  default_style: Boolean
+});
+var photoSchema = new Schema({
+  id: Number,
+  styleId: Number,
+  url: String,
+  thumbnail_url: String
+});
+
+// Last arguement is the collection name in mongoDB (usually plurals)
+// First argument is usally a singular of the last arg.
 
 module.exports.productModel = mongoose.model('Product', productSchema, 'products');
 module.exports.featureModel = mongoose.model('Feature', featureSchema, 'features');
-
+module.exports.relatedModel = mongoose.model('Related', relatedSchema, 'related');
+module.exports.skuModel = mongoose.model('Sku', skuSchema, 'skus');
+module.exports.styleModel = mongoose.model('Style', styleSchema, 'styles');
+module.exports.photoModel = mongoose.model('Photo', photoSchema, 'photos');
