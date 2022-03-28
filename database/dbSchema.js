@@ -11,7 +11,9 @@ var productSchema = new Schema({
   description: String,
   category: String,
   default_price: String,
-  features: [{ type: Schema.Types.ObjectId, ref: 'Feature' }]
+  features: [{ type: Schema.Types.ObjectId, ref: 'Feature' }], //ref Model/Table name
+  relatedProducts: [Number],
+  styles: [{ type: Schema.Types.ObjectId, ref: 'Style' }]
 });
 var featureSchema = new Schema({
   id: Number,
