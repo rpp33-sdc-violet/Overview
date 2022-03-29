@@ -62,8 +62,8 @@ var tranformProducts = async function () {
         return Promise.all([addFeature, addRelated, addStyle])
       })
       .then(() => {
-        console.log('i', i);
-        if (i === 3) {           // adjust this to none later when trying to tranform all
+        console.log('i 1000011?:', i);
+        if (i === products.length - 1) {           // adjust this to none later when trying to tranform all
           console.timeEnd('test');
           process.exit();
         }
@@ -83,6 +83,7 @@ var tranformStyles = async function () {
 
   // Add col "photos" to "styles" tables ==> photos: [photoObjId, photoObjId, …]
 }
+
 console.time('test');
 tranformProducts();
 
