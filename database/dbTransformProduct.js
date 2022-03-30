@@ -2,8 +2,9 @@ var ProductModel = require('./dbSchema.js').productModel;
 var FeatureModel = require('./dbSchema.js').featureModel;
 var RelatedModel = require('./dbSchema.js').relatedModel;
 var StyleModel = require('./dbSchema.js').styleModel;
-var PhotoModel = require('./dbSchema.js').photoModel;
-var SkuModel = require('./dbSchema.js').skuModel;
+// var PhotoModel = require('./dbSchema.js').photoModel;
+// var SkuModel = require('./dbSchema.js').skuModel;
+// eslint-disable-next-line no-unused-vars
 var mongoose = require('../database/dbConnection.js');
 var Promise = require("bluebird");
 
@@ -12,7 +13,7 @@ var tranformProducts = async function () {
   var products = await ProductModel.find({}).lean();
   // console.log('products:', products);
 
-  for (var i = 1; i < products.length; i++) {
+  for (var i = 0; i < products.length; i++) {
     // search feature with that product id
     var currentProductId = products[i].id;
     var conditionProductId = {"product_id": currentProductId};
@@ -65,6 +66,7 @@ var tranformProducts = async function () {
         console.log('i 1000011?:', i);
         if (i === products.length - 1) {           // adjust this to none later when trying to tranform all
           console.timeEnd('test');
+          // eslint-disable-next-line no-undef
           process.exit();
         }
       })
@@ -77,17 +79,9 @@ var tranformProducts = async function () {
   }
 }
 
-var tranformStyles = async function () {
-
-  // Add col "skus" to "styles" tables ==> skus: { sku: {quantity: "", size: ""}, sku: {quantity: "", size: ""}}
-
-  // Add col "photos" to "styles" tables ==> photos: [photoObjId, photoObjId, …]
-}
-
 console.time('test');
 tranformProducts();
 
-// tranformStyles();
 
 
 

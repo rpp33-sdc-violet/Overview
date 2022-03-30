@@ -38,7 +38,9 @@ var styleSchema = new Schema({
   name: String,
   sale_price: String,
   original_price: String,
-  default_style: Boolean
+  default_style: Boolean,
+  photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }], //ref Model/Table name
+  skus: [{ type: Schema.Types.ObjectId, ref: 'Sku' }]
 });
 var photoSchema = new Schema({
   id: Number,

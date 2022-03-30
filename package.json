@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "start": "nodemon ./server/server.js",
-    "db-tranform": "node ./database/dbTransform.js"
+    "db-transform-product": "node ./database/dbTransformProduct.js",
+    "db-transform-style": "node ./database/dbTransformStyle.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/rpp33-sdc-violet/overview#readme",
   "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-plugin-vue": "^8.5.0",
     "express": "^4.17.3",
     "jest": "^27.5.1",
     "mongoose": "^6.2.8",
