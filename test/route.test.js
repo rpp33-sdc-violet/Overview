@@ -67,7 +67,6 @@ describe('API Routes', function() {
       return request(app).get('/products/7')
         .expect(200)
         .then(response => {
-          console.log('res', response.body);
           expect(response.body).toEqual(expected);
         })
 
@@ -75,39 +74,81 @@ describe('API Routes', function() {
   });
 
   describe('GET /products/:product_id/styles', function() {
-  //   it('should return object', () => {
-
-  //   })
-  //   it('should have key product_id and results', () => {
-
-  //   })
-  //   it('results value should be an array of objects', () => {
-
-  //   })
-  //   it('objects in resutls array must have key style_id, name, original_price, sale_price, default?, photos, skus', () => {
-
-  //   })
-  //   it('value of photos must be array', () => {
-
-  //   })
-  //   it('value of photos must be array of objects', () => {
-
-  //   })
-  //   it('photos object must have key thumbnail_url and url', () => {
-
-  //   })
-  //   it('skus value must be an object', () => {
-
-  //   })
-  //   it('each value in the skus must have a key of sku id and value of object with key quantity and size', () => {
-
-  //   })
+    var response;
+    beforeAll(() => {
+      response = request(app).get('/products/1/styles')
+    });
+    it('should return object', () => {
+      return response
+        .expect(200)
+        .then(response => {
+          expect(Array.isArray(response.body)).toEqual(false);
+          expect(typeof response.body).toEqual('object');
+        })
+    })
+    it('should have key product_id and results', () => {
+      return response
+        .then(response => {
+          expect(response.body.product_id).toEqual("1");
+        })
+    })
+    it('results value should be an array of objects', () => {
+      return response
+        .then(response => {
+          expect(Array.isArray(response.body.results)).toEqual(true);
+        })
+    })
+    it('objects in resutls array must have key style_id, name, original_price, sale_price, default?, photos, skus', () => {
+      return response
+        .then(response => {
+          expect(response.body.results[0].style_id).toEqual(3);
+          expect(response.body.results[0].name).toEqual("Ocean Blue & Grey");
+          expect(response.body.results[0].original_price).toEqual("140");
+          expect(response.body.results[0].sale_price).toEqual("100");
+          expect(response.body.results[0]["default?"]).toEqual(false);
+          expect(Array.isArray(response.body.results[0].photos)).toEqual(true);
+          expect(Array.isArray(response.body.results[0].skus)).toEqual(false);
+          expect(typeof response.body.results[0].skus).toEqual('object');
+        })
+    })
+    it('value of photos must be array', () => {
+      return response
+        .then(response => {
+          expect(Array.isArray(response.body.results[0].photos)).toEqual(true);
+        })
+    })
+    it('photos object must have key thumbnail_url and url', () => {
+      return response
+        .then(response => {
+          expect(response.body.results[0].photos[0].url).toEqual("https://images.unsplash.com/photo-1556304653-cba65c59b3c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2761&q=80");
+          expect(response.body.results[0].photos[0].thumbnail_url).toEqual("https://images.unsplash.com/photo-1556304653-cba65c59b3c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80");
+        })
+    })
+    it('skus value must be an object', () => {
+      return response
+        .then(response => {
+          expect(Array.isArray(response.body.results[0].skus)).toEqual(false);
+          expect(typeof response.body.results[0].skus).toEqual('object');
+        })
+    })
+    it('each value in the skus id 13 must have a key of sku id and value of object with key quantity and size', () => {
+      return response
+        .then(response => {
+          expect(response.body.results[0].skus["13"].quantity).toEqual(8);
+          expect(response.body.results[0].skus["13"].size).toEqual("XS");
+        })
+    })
   });
 
   describe('GET /products/:product_id/related', function() {
-  //   it('this should return an array of all related product id', () => {
-
-  //   })
+    it('this should return an array of all related product id', () => {
+      return request(app).get('/products/1/related')
+        .expect(200)
+        .then(response => {
+          expect(response.body).toEqual([2,3,7,8]);
+          expect(Array.isArray(response.body)).toEqual(true);
+        })
+    })
   });
 
   afterAll( async ()=> {

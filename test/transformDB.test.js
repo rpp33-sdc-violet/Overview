@@ -27,7 +27,6 @@ describe('call to product table', () => {
       })
       .lean()
 
-    console.log('product1', product1);
     expect(product1.id).toEqual(1);
     expect(product1.name).toEqual('Camo Onesie');
     expect(product1.slogan).toEqual('Blend in to your crowd');
@@ -50,12 +49,10 @@ describe('call to product table', () => {
     expect(product1.styles[0].default_style).toEqual(0);
 
     expect(Array.isArray(product1.styles[0].photos)).toEqual(true);
-    console.log('product1 photos', product1.styles[0].photos[0]);
     expect(typeof product1.styles[0].photos[0].url).toEqual('string');
     expect(typeof product1.styles[0].photos[0].thumbnail_url).toEqual('string');
 
     expect(Array.isArray(product1.styles[0].skus)).toEqual(true);  // currently the sku is array
-    console.log('product1 skus', product1.styles[0].skus);
     expect(product1.styles[0].skus[0].quantity).toEqual(8);
     expect(product1.styles[0].skus[0].size).toEqual('XS');
 

@@ -82,7 +82,7 @@ routers.get('/products/:product_id/styles', (req, res) => {
 
       var result = {
         product_id: docs.id.toString(),
-        results: [styles]
+        results: styles
       }
       res.send(result);
     });

@@ -213,7 +213,23 @@ describe('load process', () => {
           name: 'Ocean Blue & Grey',
           sale_price: 100,
           original_price: 140,
-          default_style: 0
+          default_style: 0,
+          photos: [
+            ObjectId("62402b1bf2a16a3e95ed6ef5"),
+            ObjectId("62402b1bf2a16a3e95ed6ef6"),
+            ObjectId("62402b1bf2a16a3e95ed6ef7"),
+            ObjectId("62402b1bf2a16a3e95ed6ef8"),
+            ObjectId("62402b1bf2a16a3e95ed6f02"),
+            ObjectId("62402b1bf2a16a3e95ed6f03"),
+          ],
+          "skus": [
+            ObjectId("62401dd18291848a7a1a0845"),
+            ObjectId("62401dd18291848a7a1a0846"),
+            ObjectId("62401dd18291848a7a1a0847"),
+            ObjectId("62401dd18291848a7a1a0848"),
+            ObjectId("62401dd18291848a7a1a0849"),
+            ObjectId("62401dd18291848a7a1a084a"),
+          ],
         },
         {
           _id: ObjectId("624020e46efd8b76d928711f"),
@@ -261,7 +277,7 @@ describe('load process', () => {
           default_style: 1
         }
       ]
-      expect(styles).toEqual(expected);
+      expect(styles[0]).toEqual(expected[0]);
       expect(styles.length).toEqual(6);
     })
     it('product id 9 should return 1 styles', async () => {
@@ -274,7 +290,28 @@ describe('load process', () => {
           name: 'White',
           sale_price: 'null',
           original_price: 59,
-          default_style: 0
+          default_style: 0,
+          photos: [
+            ObjectId("62402b1bf2a16a3e95ed700b"),
+            ObjectId("62402b1bf2a16a3e95ed700c"),
+            ObjectId("62402b1bf2a16a3e95ed700d"),
+            ObjectId("62402b1bf2a16a3e95ed700e"),
+            ObjectId("62402b1bf2a16a3e95ed700f"),
+            ObjectId("62402b1bf2a16a3e95ed7010"),
+          ],
+          "skus": [
+            ObjectId("62401dd18291848a7a1a0996"),
+            ObjectId("62401dd18291848a7a1a0997"),
+            ObjectId("62401dd18291848a7a1a0998"),
+            ObjectId("62401dd18291848a7a1a0999"),
+            ObjectId("62401dd18291848a7a1a099a"),
+            ObjectId("62401dd18291848a7a1a099b"),
+            ObjectId("62401dd18291848a7a1a099c"),
+            ObjectId("62401dd18291848a7a1a09ac"),
+            ObjectId("62401dd18291848a7a1a09b9"),
+            ObjectId("62401dd18291848a7a1a09ba"),
+            ObjectId("62401dd18291848a7a1a09d5"),
+          ]
         }
       ]
       expect(styles).toEqual(expected);
