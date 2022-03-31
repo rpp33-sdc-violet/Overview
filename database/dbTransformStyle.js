@@ -14,9 +14,9 @@ var tranformStyles = async function () {
   var styles = await StyleModel.find({}).lean();
   // console.log('styles:', styles);
 
-  for (var i = 1; i < styles.length; i++) {
+  for (var i = 0; i < styles.length; i++) {
     console.log('i 1958102?:', i);
-    console.log('styles[i]:', styles[i]);
+    // console.log('styles[i]:', styles[i]);
     var currentStyleId = styles[i].id;
     var conditionStyleId = { "styleId": currentStyleId };
     var conditionId = { "id": currentStyleId };
@@ -30,7 +30,8 @@ var tranformStyles = async function () {
       await StyleModel.findOneAndUpdate(conditionId, updateValue, option)
         .exec((err, updated) => {
           if (err) { console.log(`error in tranform ${colName}:`, err) }
-          console.log(`updated doc with  ${colName}:`, updated);
+          // console.log(`updated doc with  ${colName}:`, updated);
+          return updated;
         })
     }
 
@@ -56,19 +57,15 @@ var tranformStyles = async function () {
       })
       .then(() => {
         console.log('i 1958102?:', i);
-        // eslint-disable-next-line no-undef
-        process.exit();
-        // if (i === products.length - 1) {           // adjust this to none later when trying to tranform all
-        //   console.timeEnd('test');
-        //   process.exit();
-        // }
+        // process.exit();
+        if (i === styles.length - 1) {           // adjust this to none later when trying to tranform all //
+          console.timeEnd('test');
+          process.exit();
+        }
       })
       .catch((err) => {
         console.log('error while tranforming style table:', err);
       })
-
-
-      break;
   }
 }
 
