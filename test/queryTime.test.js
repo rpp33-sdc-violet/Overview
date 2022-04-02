@@ -1,4 +1,5 @@
 // THIS TEST MUST RUN SEPERATELY FROM OTHER TEST
+var mongoose = require('../database/dbConnection.js');
 var start, end;
 var {performance} = require('perf_hooks');
 
@@ -83,4 +84,7 @@ describe('Query execution time', () => {
         })
     });
   })
+  afterAll(()=>{
+    mongoose.disconnect();
+  });
 })
