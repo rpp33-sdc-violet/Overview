@@ -1,3 +1,4 @@
+// THIS TEST MUST RUN SEPERATELY FROM OTHER TEST
 var start, end;
 var {performance} = require('perf_hooks');
 
