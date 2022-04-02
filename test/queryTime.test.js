@@ -23,7 +23,7 @@ describe('Query execution time', () => {
           // console.log('result first', docs);
           if (docs.name === 'Camo Onesie') {
             end = performance.now();
-            console.log('end - start', end - start);
+            console.log('end - start: first', end - start);
             expect(end - start).toBeLessThan(50);  // < 50ms
           }
         })
@@ -50,7 +50,7 @@ describe('Query execution time', () => {
           // console.log('result first', docs);
           if (docs.name === 'Evangeline Shoes') {
             end = performance.now();
-            console.log('end - start', end - start);
+            console.log('end - start: last', end - start);
             expect(end - start).toBeLessThan(50);  // < 50ms
           }
         })
@@ -76,7 +76,7 @@ describe('Query execution time', () => {
           // console.log('result first', docs);
           if (docs.name === 'Edythe 0 Trousers') {
             end = performance.now();
-            console.log('end - start', end - start);
+            console.log('end - start: middle', end - start);
             expect(end - start).toBeLessThan(50);  // < 50ms
           }
         })
