@@ -4,6 +4,7 @@ var start, end;
 var {performance} = require('perf_hooks');
 
 var ProductModel = require('../database/dbSchema.js').productModel;
+var ms = 150; // if running all test together, if running just this test use 50
 
 describe('Query execution time', () => {
   describe('First product query time', () => {
@@ -26,7 +27,7 @@ describe('Query execution time', () => {
           if (docs.name === 'Camo Onesie') {
             end = performance.now();
             console.log('end - start: first', end - start);
-            expect(end - start).toBeLessThan(50);  // < 50ms
+            expect(end - start).toBeLessThan(ms);  // < 50ms
           }
         })
     });
@@ -53,7 +54,7 @@ describe('Query execution time', () => {
           if (docs.name === 'Evangeline Shoes') {
             end = performance.now();
             console.log('end - start: last', end - start);
-            expect(end - start).toBeLessThan(50);  // < 50ms
+            expect(end - start).toBeLessThan(ms);  // < 50ms
           }
         })
     });
@@ -79,7 +80,7 @@ describe('Query execution time', () => {
           if (docs.name === 'Edythe 0 Trousers') {
             end = performance.now();
             console.log('end - start: middle', end - start);
-            expect(end - start).toBeLessThan(50);  // < 50ms
+            expect(end - start).toBeLessThan(ms);  // < 50ms
           }
         })
     });
