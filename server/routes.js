@@ -33,6 +33,7 @@ routers.get('/products/:product_id', (req, res) => {
   console.log('product_id', product_id);
   ProductModel.findOne({"id": product_id}, fields).populate('features','feature value -_id').lean().exec( function (err, docs) {
     if (err) { console.log('err retrieving data for /products/:product_id', err); }
+    docs.default_price = docs.default_price.toString();
     res.send(docs);
   });
 
@@ -59,6 +60,7 @@ routers.get('/products/:product_id/styles', (req, res) => {
       if (err) { console.log('err retrieving data for /products/:product_id', err); }
       var styles = docs.styles.map((style) => {
         var defaultS = style.default_style === 0 ? false: true;
+        var salePrice = style.sale_price === "null" ? null : style.sale_price.toString();
         var skuObjs = style.skus.reduce((previousValue, currentValue) => {
           var skuId = currentValue.id;
           var skuSize = currentValue.size;
@@ -73,7 +75,7 @@ routers.get('/products/:product_id/styles', (req, res) => {
           "style_id": style.id,
           "name": style.name,
           "original_price": style.original_price.toString(),
-          "sale_price": style.sale_price.toString(),
+          "sale_price": salePrice,
           "default?": defaultS,
           "photos": style.photos,
           "skus": skuObjs

@@ -56,7 +56,7 @@ describe('API Routes', function() {
         "slogan":"2019 Stanley Cup Limited Edition",
         "description":"Touch down in the land of the Delta Blues in the middle of the pouring rain",
         "category":"Dress Shoes",
-        "default_price":120,
+        "default_price":"120",
         "features":[
           {"feature":"Sole","value":"Rubber"},
           {"feature":"Material","value":"FullControlSkin"},
