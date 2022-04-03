@@ -6,6 +6,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "start": "nodemon ./server/server.js",
+    "stress-test-api": "artillery run ./test/artillery-config-fetch-api.yml",
+    "stress-test-view": "artillery run ./test/artillery-config-fetch-view.yml",
     "db-transform-product": "node ./database/dbTransformProduct.js",
     "db-transform-style": "node ./database/dbTransformStyle.js"
   },

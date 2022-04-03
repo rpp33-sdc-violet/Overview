@@ -1,0 +1,25 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: 1 RPS
+    - duration: 10
+      arrivalRate: 10
+      name: 10 RPS
+    - duration: 10
+      arrivalRate: 100
+      name: 100 RPS
+    - duration: 10
+      arrivalRate: 1000
+      name: 1000 RPS
+
+scenarios:
+- name: "Fetch product 1000000"
+  flow:
+    - get:
+        url: "/1000000"
+      # capture: 
+      #   - json: "$.results.product_id"
+      #     as: "productId"
+    - think: 5
