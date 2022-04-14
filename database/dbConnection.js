@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/SDC')
+mongoose.connect('mongodb://127.0.0.1:27017/SDC') // change to db for docker purpose. // change back to localhost if using localhost
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', err => {
-  logError('mongoose connection err: ', err);
+  console.log('mongoose connection err: ', err);
 });
 
 module.exports = mongoose;

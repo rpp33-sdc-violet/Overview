@@ -15,7 +15,7 @@ config:
     # - duration: 10
     #   arrivalRate: 1000
     #   name: 1000 RPS
-
+data parameterice
 scenarios:
 - name: "Fetch directly to routes 1000000"
   flow:

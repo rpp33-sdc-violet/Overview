@@ -112,3 +112,10 @@ related.csv
 skus.csv
 styles.csv
 photos.csv
+
+# json
+features.json
+photos.json
+products.json
+skus.json
+styles.json
