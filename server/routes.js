@@ -58,6 +58,7 @@ routers.get('/products/:product_id/styles', (req, res) => {
     .lean()
     .exec( function (err, docs) {
       if (err) { console.log('err retrieving data for /products/:product_id', err); }
+      console.log('docs', docs);
       var styles = docs.styles.map((style) => {
         var defaultS = style.default_style === 0 ? false: true;
         var salePrice = style.sale_price === "null" ? null : style.sale_price.toString();
