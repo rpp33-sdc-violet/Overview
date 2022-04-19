@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:8080"
+  http:
+    timeout: 10
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: 1 RPS
+    - duration: 10
+      arrivalRate: 10
+      name: 10 RPS
+    - duration: 10
+      arrivalRate: 100
+      name: 100 RPS
+    # - duration: 10
+    #   arrivalRate: 1000
+    #   name: 1000 RPS
+
+scenarios:
+- name: "Fetch directly to routes 1002000"
+  flow:
+    - get:
+        url: "/products/1000003/styles"
+        async: true
+        capture:
+            json: "$.product_id"
+            as: "productId"
+    - log: "Current captured is set to: {{ productId }}"
+    - get:
+        url: "/products/{{productId}}/related"
+    # - think: 5
