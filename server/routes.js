@@ -57,7 +57,10 @@ routers.get('/products/:product_id/styles', (req, res) => {
     })
     .lean()
     .exec( function (err, docs) {
-      if (err) { console.log('err retrieving data for /products/:product_id', err); }
+      if (err) {
+        console.log('err retrieving data for /products/:product_id', err);
+        res.send('Cannot retrieve data from SDC database')
+      }
       console.log('docs', docs);
       var styles = docs.styles.map((style) => {
         var defaultS = style.default_style === 0 ? false: true;

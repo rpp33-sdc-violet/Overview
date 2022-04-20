@@ -8,8 +8,8 @@ services:
     container_name: container-sdc-violet-product
     image: sdc-violet-product:1.0 #Adding the image directive when a build directive exists in a service will name and tag the built image
     ports:
-      - "80:8080" #front = local host port that docker listen to, end = port in docker that app listen to
+      - "3030:8080" #front = local host port that docker listen to, end = port in docker that app listen to
 
 # build, recreate container, and run by calling docker-compose up -d (first time) or docker-compose up --build -d (for second time)
 # -d is to run in background mode even after closing terminal window
-# then go to localhost:80 to see the result (if run the npm start locally must go to localhost:8080)
+# then go to localhost:3030 to see the result (if run the npm start locally must go to localhost:8080)

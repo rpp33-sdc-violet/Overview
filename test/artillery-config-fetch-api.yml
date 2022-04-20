@@ -15,12 +15,18 @@ config:
     # - duration: 10
     #   arrivalRate: 1000
     #   name: 1000 RPS
+  payload:
+    - path: "productNumbers.csv"
+      fields:
+        - "productNumber"
+      order: sequence
 
 scenarios:
 - name: "Fetch directly to routes 1002000"
   flow:
+    - log: "Current productNumber is set to: {{ productNumber }}"
     - get:
-        url: "/products/1000003/styles"
+        url: "/products/{{ productNumber }}/styles"
         async: true
         capture:
             json: "$.product_id"
