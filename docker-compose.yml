@@ -8,8 +8,13 @@ services:
     container_name: container-sdc-violet-product
     image: sdc-violet-product:1.0 #Adding the image directive when a build directive exists in a service will name and tag the built image
     ports:
-      - "3030:8080" #front = local host port that docker listen to, end = port in docker that app listen to
+      - "80:8080" #front = local host port that docker listen to, end = port in docker that app listen to
 
 # build, recreate container, and run by calling docker-compose up -d (first time) or docker-compose up --build -d (for second time)
 # -d is to run in background mode even after closing terminal window
-# then go to localhost:3030 to see the result (if run the npm start locally must go to localhost:8080)
+# then go to localhost:3030 to see the result (if run the npm start locally must go to localhost:80)
+
+# docker build --platform linux/amd64  .  ==> to specify the build platform
+# docker-compose up without --build will not create a new image, but will run container from this docker-compose file
+# docker run image:tag will run the a new container from specify image without talking to docker-compose file which will result in error because haven't specify the port
+# inside ec2 you need to run command line instead of compose file docker run --name container-sdc-violet-product -p 80:8080 12514/sdc-violet-product:version-amd64 

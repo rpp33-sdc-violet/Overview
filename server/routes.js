@@ -107,5 +107,9 @@ routers.get('/products/:product_id/related', (req, res) => {
 
 });
 
+routers.get('/loaderio-b66b726b749a366420e2e410af682ca3.txt', (req, res) => {
+  res.sendFile('/loaderio-b66b726b749a366420e2e410af682ca3.txt')
+})
+
 module.exports = routers;
 

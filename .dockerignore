@@ -1,1 +1,7 @@
 *.csv
+dump/
+database/CSV
+db-seed/
+node_modules/
+.env
+coverage/
