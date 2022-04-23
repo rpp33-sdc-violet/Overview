@@ -1,6 +1,7 @@
 var express = require('express');
 var routers = express.Router();
 var ProductModel = require('../database/dbSchema.js').productModel;
+const path = require('path');
 
 routers.get('/test', (req, res) => {
   ProductModel.find({id: 9}).populate('features', 'feature value -_id').lean().exec( function (err, docs) {
@@ -20,7 +21,9 @@ routers.get('/products', (req, res) => {
   }
 
   ProductModel.find({}, fields, options).lean().exec( function (err, docs) {
-    if (err) { console.log('err retrieving data for /products', err); }
+    if (err) {
+      res.send('cannot retrieve products');
+    }
     res.send(docs);
   });
 
@@ -32,7 +35,9 @@ routers.get('/products/:product_id', (req, res) => {
   var fields = '-_id -styles -relatedProducts'
   console.log('product_id', product_id);
   ProductModel.findOne({"id": product_id}, fields).populate('features','feature value -_id').lean().exec( function (err, docs) {
-    if (err) { console.log('err retrieving data for /products/:product_id', err); }
+    if (err) {
+      res.send('cannot retrieve product');
+    }
     docs.default_price = docs.default_price.toString();
     res.send(docs);
   });
@@ -62,6 +67,9 @@ routers.get('/products/:product_id/styles', (req, res) => {
         res.send('Cannot retrieve data from SDC database')
       }
       console.log('docs', docs);
+      if (docs === null) {
+        res.send('no data in the database')
+      }
       var styles = docs.styles.map((style) => {
         var defaultS = style.default_style === 0 ? false: true;
         var salePrice = style.sale_price === "null" ? null : style.sale_price.toString();
@@ -108,7 +116,8 @@ routers.get('/products/:product_id/related', (req, res) => {
 });
 
 routers.get('/loaderio-b66b726b749a366420e2e410af682ca3.txt', (req, res) => {
-  res.sendFile('/loaderio-b66b726b749a366420e2e410af682ca3.txt')
+  var option = { root: path.join(__dirname, '..') }
+  res.sendFile('loaderio-b66b726b749a366420e2e410af682ca3.txt', option)
 })
 
 module.exports = routers;
