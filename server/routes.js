@@ -2,6 +2,7 @@ var express = require('express');
 var routers = express.Router();
 var ProductModel = require('../database/dbSchema.js').productModel;
 const path = require('path');
+console.log('loader token', process.env.LOADERIO_TOKEN)
 
 routers.get('/test', (req, res) => {
   ProductModel.find({id: 9}).populate('features', 'feature value -_id').lean().exec( function (err, docs) {
@@ -45,7 +46,7 @@ routers.get('/products/:product_id', (req, res) => {
 });
 
 routers.get('/products/:product_id/styles', (req, res) => {
-
+  console.log('loader token', process.env.LOADERIO_TOKEN)
   var product_id = req.params.product_id;
   var fields = '-_id -features -relatedProducts'
   console.log('product_id', product_id);
@@ -115,9 +116,10 @@ routers.get('/products/:product_id/related', (req, res) => {
 
 });
 
-routers.get('/loaderio-b66b726b749a366420e2e410af682ca3.txt', (req, res) => {
+routers.get(`/loaderio-${process.env.LOADERIO_TOKEN}.txt`, (req, res) => {
+  console.log('loader token2', process.env.LOADERIO_TOKEN)
   var option = { root: path.join(__dirname, '..') }
-  res.sendFile('loaderio-b66b726b749a366420e2e410af682ca3.txt', option)
+  res.sendFile(`loaderio-${process.env.LOADERIO_TOKEN}.txt`, option)
 })
 
 module.exports = routers;
