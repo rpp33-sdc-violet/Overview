@@ -8,7 +8,7 @@ services:
     container_name: container-sdc-violet-product
     platform: linux/amd64
     env_file: .env
-    image: 12514/sdc-violet-product:version-amd64-5-with-newrelicnode #Adding the image directive when a build directive exists in a service will name and tag the built image
+    image: 12514/sdc-violet-product:version-amd64-8 #Adding the image directive when a build directive exists in a service will name and tag the built image
     ports:
       - "80:8080" #front = local host port that docker listen to, end = port in docker that app listen to
 

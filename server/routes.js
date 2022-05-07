@@ -21,11 +21,14 @@ routers.get('/products', (req, res) => {
     limit: count
   }
 
-  ProductModel.find({}, fields, options).lean().exec( function (err, docs) {
+  ProductModel.find({}, fields, options).lean().exec( async function (err, docs) {
     if (err) {
-      res.send('cannot retrieve products');
+      await res.send([]);
     }
-    res.send(docs);
+    if (!docs || docs === null) {
+      await res.send([]);
+    }
+    await res.send(docs);
   });
 
 });
@@ -35,18 +38,20 @@ routers.get('/products/:product_id', (req, res) => {
   var product_id = req.params.product_id;
   var fields = '-_id -styles -relatedProducts'
   console.log('product_id', product_id);
-  ProductModel.findOne({"id": product_id}, fields).populate('features','feature value -_id').lean().exec( function (err, docs) {
+  ProductModel.findOne({"id": product_id}, fields).populate('features','feature value -_id').lean().exec( async function (err, docs) {
     if (err) {
-      res.send('cannot retrieve product');
+      await res.send({});
+    }
+    if (!docs || docs === null) {
+      await res.send({});
     }
     docs.default_price = docs.default_price.toString();
-    res.send(docs);
+    await res.send(docs);
   });
 
 });
 
 routers.get('/products/:product_id/styles', (req, res) => {
-  console.log('loader token', process.env.LOADERIO_TOKEN)
   var product_id = req.params.product_id;
   var fields = '-_id -features -relatedProducts'
   var errorresult = {
@@ -68,17 +73,17 @@ routers.get('/products/:product_id/styles', (req, res) => {
       populate: { path: 'skus', select: '-styleId -_id' }
     })
     .lean()
-    .exec( function (err, docs) {
+    .exec( async function (err, docs) {
       if (err) {
         console.log('err retrieving data for /products/:product_id', err);
         errorresult.error = 'Cannot retrieve data from SDC database';
         errorresult.errorcode = err;
-        res.send(errorresult);
+        await res.send(errorresult);
       }
       console.log('docs', docs);
-      if (docs === null) {
+      if (docs === null || !docs) {
         errorresult.error = 'no data in the database';
-        res.send(errorresult);
+        await res.send(errorresult);
       }
       var styles = docs.styles.map((style) => {
         var defaultS = style.default_style === 0 ? false: true;
@@ -108,7 +113,7 @@ routers.get('/products/:product_id/styles', (req, res) => {
         product_id: docs.id.toString(),
         results: styles
       }
-      res.send(result);
+      await res.send(result);
     });
 
 });
@@ -118,9 +123,15 @@ routers.get('/products/:product_id/related', (req, res) => {
   var product_id = req.params.product_id;
   var fields = 'relatedProducts -_id'
 
-  ProductModel.findOne({"id": product_id}, fields).lean().exec( function (err, docs) {
-    if (err) { console.log('err retrieving data for /products/:product_id/related', err); }
-    res.send(docs.relatedProducts);
+  ProductModel.findOne({"id": product_id}, fields).lean().exec( async function (err, docs) {
+    if (err) {
+      console.log('err retrieving data for /products/:product_id/related', err);
+      await res.send([]);
+    }
+    if (!docs || docs === null) {
+      await res.send([]);
+    }
+    await res.send(docs.relatedProducts);
   });
 
 });
