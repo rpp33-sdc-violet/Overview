@@ -119,3 +119,6 @@ photos.json
 products.json
 skus.json
 styles.json
+/dump
+/db-seed
+/database/CSV

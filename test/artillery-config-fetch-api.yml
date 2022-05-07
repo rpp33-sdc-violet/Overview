@@ -1,31 +1,37 @@
 config:
-  target: "http://localhost:8080"
+  target:  "http://ec2-52-221-191-226.ap-southeast-1.compute.amazonaws.com" #"http://localhost:8080"
   http:
-    timeout: 10
+    timeout: 30
   phases:
-    - duration: 10
-      arrivalRate: 1
-      name: 1 RPS
-    - duration: 10
-      arrivalRate: 10
-      name: 10 RPS
-    - duration: 10
-      arrivalRate: 100
-      name: 100 RPS
+    #- duration: 10
+    #  arrivalRate: 1
+    #  name: 1 RPS
+    #- duration: 10
+    #  arrivalRate: 10
+    #  name: 10 RPS
+    - duration: 30
+      arrivalRate: 600
+      name: 600 RPS
     # - duration: 10
     #   arrivalRate: 1000
     #   name: 1000 RPS
+  payload:
+    - path: "productNumbers.csv"
+      fields:
+        - "productNumber"
+      order: sequence
 
 scenarios:
 - name: "Fetch directly to routes 1002000"
   flow:
+    #- log: "Current productNumber is set to: {{ productNumber }}"
     - get:
-        url: "/products/1000003/styles"
+        url: "/products/{{ productNumber }}/styles"
         async: true
         capture:
             json: "$.product_id"
             as: "productId"
-    - log: "Current captured is set to: {{ productId }}"
-    - get:
-        url: "/products/{{productId}}/related"
-    # - think: 5
+    # - log: "Current captured is set to: {{ productId }}"
+    # - get:
+    #   url: "/products/{{productId}}/related"
+    - think: 5

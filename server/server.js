@@ -1,3 +1,4 @@
+require('newrelic');
 var port = 8080
 var app = require('./index.js');
 
