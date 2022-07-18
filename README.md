@@ -3,7 +3,7 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
 
 ---
 ## Table of Contents
-  - <a href='system-design'>System Design</a>
+  - <a href='#system-design'>System Design</a>
   - <a href='#usage'>Usage</a>
   - <a href='#installation'>Installation</a>
   - <a href='#other-services'>Other Services</a>
@@ -16,17 +16,10 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ![Stress Test Results](https://github.com/rpp33-sdc-violet/Products/blob/main/readmePhoto/1800rps.png)
 
   ### Tech Stack
-    - Node.js
-    - Express
-    - MongoDB
-    - NGINX
-    - AWS EC2
-    - Docker
-    - Jest
-    - SuperTest
-    - Artillery
-    - Loader.io
-    - New Relic
+  | Node.js | Express | MongoDB |
+  | NGINX | AWS EC2 | Docker |
+  | Jest | SuperTest | Artillery |
+  | Loader.io | New Relic |
 
 ---
 ## Usage
@@ -178,12 +171,13 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ```
 
   6. In the file dbConnection.js, switch between two options localhost and EC2.
-  :point_right: OPTION1: Using Database deployed in EC2 + MongoDB has username & PW
+
+  - :point_right: OPTION1: Using Database deployed in EC2 + MongoDB has username & PW
   ```
   mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.EC2_IP_DB}:27017/SDC`)
   ```
 
-  :point_right: OPTION2: Using database in a local machine
+  - :point_right: OPTION2: Using database in a local machine
   ```
   mongoose.connect(`mongodb://localhost:27017/SDC`)
   ```
