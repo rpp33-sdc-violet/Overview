@@ -169,7 +169,7 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ```
   4. change file name from "sampleEnv" to ".env"
   5. update all variable inside .env file
-    ```
+  ```
   MONGO_USER= [mongodb username]
   MONGO_PW=  [mongodb password]
   EC2_IP_DB= [IP address of the EC2 deployed database]/[or blank if using localhost]
@@ -182,6 +182,7 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ```
   mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.EC2_IP_DB}:27017/SDC`)
   ```
+  
   OPTION2: Using database in a local machine
   ```
   mongoose.connect(`mongodb://localhost:27017/SDC`)
