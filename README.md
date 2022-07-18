@@ -1,4 +1,4 @@
-# Products API services
+# :shopping_cart: Products API services :shopping:
 Project Atelier's Products API Service is responsible for CRUD operations on Product's overview data. Due to increased demands of production traffic, it replaced the existing API with a back end system design that can support the full data set and scaled to 1500 requests per second (RPS) with a latency of < 10ms and 0% error rate.
 
 ---
@@ -178,12 +178,12 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ```
 
   6. In the file dbConnection.js, switch between two options localhost and EC2.
-  OPTION1: Using Database deployed in EC2 + MongoDB has username & PW
+  :point_right: OPTION1: Using Database deployed in EC2 + MongoDB has username & PW
   ```
   mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.EC2_IP_DB}:27017/SDC`)
   ```
-  
-  OPTION2: Using database in a local machine
+
+  :point_right: OPTION2: Using database in a local machine
   ```
   mongoose.connect(`mongodb://localhost:27017/SDC`)
   ```
