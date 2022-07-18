@@ -16,10 +16,10 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ![Stress Test Results](https://github.com/rpp33-sdc-violet/Products/blob/main/readmePhoto/1800rps.png)
 
   ### Tech Stack
-  | --- | --- | --- |
+  | ------- | ------- | ------- |
   | Node.js | Express | MongoDB |
-  | NGINX | AWS EC2 | Docker |
-  | Jest | SuperTest | Artillery |
+  | NGINX   | AWS EC2 | Docker  |
+  | Jest    | SuperTest | Artillery |
   | Loader.io | New Relic | Bluebird |
 
 ---
