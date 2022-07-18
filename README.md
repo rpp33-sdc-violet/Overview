@@ -1,6 +1,7 @@
-# Products
+# Products API services
 Project Atelier's Products API Service is responsible for CRUD operations on Product's overview data. Due to increased demands of production traffic, it replaced the existing API with a back end system design that can support the full data set and scaled to 1500 requests per second (RPS) with a latency of < 10ms and 0% error rate.
 
+---
 ## Table of Contents
   - <a href='system-design'>System Design</a>
   - <a href='#usage'>Usage</a>
@@ -10,9 +11,9 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
 ---
 ## System Design
   ### Architecture
-  ![Architecture]()
+  ![Architecture](https://github.com/rpp33-sdc-violet/Products/blob/main/readmePhoto/backend%20architecture.png)
   ### Stress Test Results
-  ![Stress Test Results]()
+  ![Stress Test Results](https://github.com/rpp33-sdc-violet/Products/blob/main/readmePhoto/1800rps.png)
 
   ### Tech Stack
     - Node.js
@@ -27,6 +28,7 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
     - Loader.io
     - New Relic
 
+---
 ## Usage
   ### List all products
   Returns a list of all products of the retail website.
@@ -151,8 +153,9 @@ Project Atelier's Products API Service is responsible for CRUD operations on Pro
   ```
   3. Set up username and password to access database
 
-  ### For Dockerized service, Please go to `https://hub.docker.com/repository/docker/12514/sdc-violet-product`:
-  1. inside EC2 shell, run:
+  ### For Dockerized service:
+  1. Choose version in this link: `https://hub.docker.com/repository/docker/12514/sdc-violet-product`
+  2. inside EC2 shell, run:
   ```
   docker run -p 80:8080  --env MONGO_USER=[username] --env MONGO_PW=[password] --env EC2_IP_DB=[ip address of the deployed database] --env LOADERIO_TOKEN=[loader.io token] --env NEW_RELIC_ENABLED=[false] 12514/sdc-violet-product:version-amd64-8
   ```
